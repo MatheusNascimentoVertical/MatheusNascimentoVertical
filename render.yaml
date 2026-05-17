@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: gestao-sistemas
+    env: node
+    region: oregon
+    plan: free
+    rootDir: dashboard/backend
+    buildCommand: npm install && npm run build
+    startCommand: node server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3001
+      - key: DB_PATH
+        value: /opt/render/project/src/dashboard/backend/data.sqlite

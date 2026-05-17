@@ -1,11 +1,15 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
+const IS_PROD = process.env.NODE_ENV === 'production';
 
-app.use(cors({ origin: process.env.FRONTEND_URL || 'http://localhost:5173' }));
+if (!IS_PROD) {
+  app.use(cors({ origin: process.env.FRONTEND_URL || 'http://localhost:5173' }));
+}
 app.use(express.json());
 
 app.use('/api/systems', require('./routes/systems'));
@@ -41,5 +45,14 @@ app.get('/api/stats', (req, res) => {
   };
   res.json(stats);
 });
+
+// Serve React frontend in production
+if (IS_PROD) {
+  const frontendDist = path.join(__dirname, '..', 'frontend', 'dist');
+  app.use(express.static(frontendDist));
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(frontendDist, 'index.html'));
+  });
+}
 
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));

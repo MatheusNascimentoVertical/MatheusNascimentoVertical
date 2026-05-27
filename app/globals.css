@@ -1,0 +1,105 @@
+@import "tailwindcss";
+
+:root {
+  /* Brand primary — from logo */
+  --paizao-navy: #1a2654;
+  --paizao-navy-deep: #0f1424;
+  --paizao-gold: #d4a93a;
+  --paizao-gold-bright: #f0c64a;
+  --paizao-gold-soft: #b89030;
+
+  /* Brazilian accents */
+  --paizao-green: #009c3b;
+  --paizao-yellow: #ffdf00;
+  --paizao-red: #e63946;
+
+  /* Neutrals */
+  --paizao-bg: #0a0e1a;
+  --paizao-surface: #0f1424;
+  --paizao-surface-2: #161b2e;
+  --paizao-ink: #f5f3ef;
+  --paizao-ink-dim: #8a8d9a;
+  --paizao-line: rgba(212, 169, 58, 0.15);
+
+  /* WhatsApp CTA */
+  --wa-green: #25D366;
+  --wa-green-dark: #128C7E;
+}
+
+@theme inline {
+  --color-paizao-navy: var(--paizao-navy);
+  --color-paizao-navy-deep: var(--paizao-navy-deep);
+  --color-paizao-gold: var(--paizao-gold);
+  --color-paizao-gold-bright: var(--paizao-gold-bright);
+  --color-paizao-gold-soft: var(--paizao-gold-soft);
+  --color-paizao-green: var(--paizao-green);
+  --color-paizao-yellow: var(--paizao-yellow);
+  --color-paizao-red: var(--paizao-red);
+  --color-paizao-bg: var(--paizao-bg);
+  --color-paizao-surface: var(--paizao-surface);
+  --color-paizao-surface-2: var(--paizao-surface-2);
+  --color-paizao-ink: var(--paizao-ink);
+  --color-paizao-ink-dim: var(--paizao-ink-dim);
+  --color-wa-green: var(--wa-green);
+  --color-wa-green-dark: var(--wa-green-dark);
+  --font-display: var(--font-bebas);
+  --font-body: var(--font-archivo);
+  --font-heavy: var(--font-archivo-black);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--paizao-bg);
+  color: var(--paizao-ink);
+  font-family: var(--font-archivo), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Grain overlay texture */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.4;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--paizao-bg); }
+::-webkit-scrollbar-thumb { background: var(--paizao-gold-soft); border-radius: 3px; }
+
+/* Selection */
+::selection { background: var(--paizao-gold); color: var(--paizao-bg); }
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Gold glow utility */
+.glow-gold {
+  box-shadow: 0 0 20px rgba(212, 169, 58, 0.4), 0 0 40px rgba(212, 169, 58, 0.1);
+}
+
+.glow-gold-text {
+  text-shadow: 0 0 20px rgba(212, 169, 58, 0.6);
+}
+
+/* Border gold subtle */
+.border-gold {
+  border: 1px solid var(--paizao-line);
+}
